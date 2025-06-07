@@ -46,3 +46,15 @@ export const decrypt = async ({
     throw error;
   })
 }
+
+export function matchPolicy(column, policy) {
+  const [db, table, col, action] = column.split("::");
+  const [pDb, pTable, pCol, pAction] = policy.split("::");
+
+  return (
+    (pDb === "*" || pDb === db) &&
+    (pAction === "*" || pAction === action) &&
+    (pTable === "*" || pTable === table) &&
+    (pCol === "*" || pCol === col)
+  );
+}

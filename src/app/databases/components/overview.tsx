@@ -1,12 +1,13 @@
 'use client'
 
 import Dagre from '@dagrejs/dagre';
-import { Table, TableSchemaNode } from "@/components/TableSchemaNode";
+import { TableSchemaNode } from "@/components/TableSchemaNode";
 import { Background, Panel, ReactFlow, useEdgesState, useNodesState, useReactFlow } from "@xyflow/react"
 import { useCallback, useMemo } from "react";
+import { ColumnMetadata } from '@/types/column';
 
 type Props = {
-  data: Record<string, string[]>;
+  data: Record<string, ColumnMetadata[]>;
   relations: { source: string, target: string }[];
 }
 
@@ -91,18 +92,19 @@ export const Overview: React.FC<Props> = ({ data, relations }) => {
     [nodes, edges],
   );
 
-  return <div className="flex-1">
+  return <div className="flex-1 w-full h-full">
     <ReactFlow
       nodes={nodes}
       nodeTypes={nodeTypes}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       edges={edges}
-      fitView>
+      fitView
+    >
       <Background />
       <Panel position="top-right">
-        <button onClick={() => onLayout('TB')} className="btn">vertical layout</button>
-        <button onClick={() => onLayout('LR')} className="btn">horizontal layout</button>
+        <button onClick={() => onLayout('TB')} className="btn">Vertical layout</button>
+        <button onClick={() => onLayout('LR')} className="btn">Horizontal layout</button>
       </Panel>
     </ReactFlow >
   </div >

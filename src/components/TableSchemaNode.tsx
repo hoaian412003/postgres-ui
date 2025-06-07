@@ -69,23 +69,42 @@ export const TableSchemaNode: React.FC<Props> = ({ data }) => {
 
 export function getPostgresTypeIcon(dataType: string, size = 16) {
   const type = dataType.toLowerCase();
+  const commonProps = {
+    size,
+  };
 
-  if (/int|serial/.test(type)) return <Hash size={size} />;
-  if (/float|real|double|numeric|decimal/.test(type)) return <Type size={size} />;
-  if (/char|text|citext/.test(type)) return <List size={size} />;
-  if (/bool/.test(type)) return <KeyRound size={size} />;
-  if (/uuid/.test(type)) return <KeyRound size={size} />;
-  if (/date|time|interval/.test(type)) return <Calendar size={size} />;
-  if (/json/.test(type)) return <FileJson size={size} />;
-  if (/^_/.test(type)) return <Layers size={size} />;
-  if (/bytea/.test(type)) return <Binary size={size} />;
-  if (/enum/.test(type)) return <List size={size} />;
-  if (/point|line|polygon|geometry|circle|box|path/.test(type)) return <Cloud size={size} />;
-  if (/inet|cidr|macaddr/.test(type)) return <Wifi size={size} />;
-  if (/money/.test(type)) return <DollarSign size={size} />;
-  if (/bit/.test(type)) return <Binary size={size} />;
-  if (/tsvector|tsquery/.test(type)) return <Search size={size} />;
-  if (/xml/.test(type)) return <Code size={size} />;
+  if (/int|serial/.test(type))
+    return <Hash {...commonProps} color="#2563eb" />; // Blue
+  if (/float|real|double|numeric|decimal/.test(type))
+    return <Type {...commonProps} color="#0ea5e9" />; // Cyan
+  if (/char|text|citext/.test(type))
+    return <List {...commonProps} color="#10b981" />; // Green
+  if (/bool/.test(type))
+    return <KeyRound {...commonProps} color="#f97316" />; // Orange
+  if (/uuid/.test(type))
+    return <KeyRound {...commonProps} color="#8b5cf6" />; // Violet
+  if (/date|time|interval/.test(type))
+    return <Calendar {...commonProps} color="#eab308" />; // Yellow
+  if (/json/.test(type))
+    return <FileJson {...commonProps} color="#14b8a6" />; // Teal
+  if (/^_/.test(type))
+    return <Layers {...commonProps} color="#6b7280" />; // Gray
+  if (/bytea/.test(type))
+    return <Binary {...commonProps} color="#4b5563" />; // Dark Gray
+  if (/enum/.test(type))
+    return <List {...commonProps} color="#22c55e" />; // Lime
+  if (/point|line|polygon|geometry|circle|box|path/.test(type))
+    return <Cloud {...commonProps} color="#38bdf8" />; // Light Blue
+  if (/inet|cidr|macaddr/.test(type))
+    return <Wifi {...commonProps} color="#f472b6" />; // Pink
+  if (/money/.test(type))
+    return <DollarSign {...commonProps} color="#16a34a" />; // Emerald
+  if (/bit/.test(type))
+    return <Binary {...commonProps} color="#7c3aed" />; // Indigo
+  if (/tsvector|tsquery/.test(type))
+    return <Search {...commonProps} color="#3b82f6" />; // Blue
+  if (/xml/.test(type))
+    return <Code {...commonProps} color="#a855f7" />; // Purple
 
-  return <Box size={size} />; // Default fallback
+  return <Box {...commonProps} color="#9ca3af" />; // Default - Neutral Gray
 }

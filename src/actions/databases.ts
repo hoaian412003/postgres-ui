@@ -1,7 +1,7 @@
 'use server';
 
 import { getClient } from "@/utils/database";
-import { decrypt } from "@/utils/engine";
+import { decrypt, matchPolicy } from "@/utils/engine";
 import { getSetofRole } from "@/utils/role";
 import { getSessionPrivateKey } from "./session";
 
@@ -50,8 +50,7 @@ export const getAccesable = async () => {
   // Filter against policy set
   const filtered = allPaths.filter(path => {
     return policySet.some(pattern => {
-      const regex = new RegExp("^" + pattern.replace(/\./g, "\\.").replace(/\*/g, ".*") + "$");
-      return regex.test(path);
+      return matchPolicy(path.replaceAll(".", "::") + "::select", pattern)
     });
   });
 
